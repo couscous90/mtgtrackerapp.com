@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MTG Stat Tracker — Meticulous Data. Unrelenting Truths.</title>
-  <meta name="description" content="Track your Commander games with precision. MTG Stat Tracker gives you the stats, history, and insights your playgroup deserves." />
+  <title>MTG Stat Tracker — The Digital Home for Your Friday Night Crew</title>
+  <meta name="description" content="MTG Stat Tracker brings real stats to your Commander table. Mobile-first, friction-free, and built for the IRL table." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -22,29 +22,20 @@
       --text-secondary: #A0AEC0;
       --text-muted: #4A5568;
       --border: #2D3F5E;
+      --light-bg: #F7FAFC;
+      --light-card: #FFFFFF;
+      --light-text: #1A253E;
+      --light-text-secondary: #4A5568;
+      --light-border: #E2E8F0;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       background-color: var(--navy);
       color: var(--text);
       font-family: 'Roboto', sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
-    }
-
-    /* Grid texture overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,230,180,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,230,180,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
     }
 
     /* ── NAV ── */
@@ -55,12 +46,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 40px;
-      background: rgba(26, 37, 62, 0.85);
+      padding: 16px 48px;
+      background: rgba(26, 37, 62, 0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-
     .nav-logo {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 22px;
@@ -68,27 +58,33 @@
       color: var(--cyan);
       text-decoration: none;
     }
-
     .nav-links {
       display: flex;
       gap: 32px;
       list-style: none;
     }
-
     .nav-links a {
       color: var(--text-secondary);
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
-      letter-spacing: 0.5px;
       transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--cyan); }
+    .nav-cta {
+      background: var(--cyan);
+      color: var(--navy);
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover { background: #00ffca; transform: translateY(-1px); }
 
-    /* ── HERO ── */
+    /* ── SECTION 1: HERO ── */
     .hero {
-      position: relative;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -96,466 +92,475 @@
       justify-content: center;
       text-align: center;
       padding: 120px 24px 80px;
+      position: relative;
       overflow: hidden;
-      z-index: 1;
     }
-
-    .hero-glow {
+    .hero-grid {
       position: absolute;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(ellipse, rgba(0,230,180,0.12) 0%, transparent 70%);
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,230,180,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,230,180,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
       pointer-events: none;
     }
-
+    .hero-glow {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(0,230,180,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
     .hero-eyebrow {
       font-family: 'Roboto Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 3px;
       color: var(--cyan);
       text-transform: uppercase;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       opacity: 0;
       animation: fadeUp 0.6s ease forwards 0.2s;
     }
-
     .hero-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(56px, 10vw, 120px);
-      line-height: 0.95;
+      font-size: clamp(64px, 12vw, 140px);
+      line-height: 0.9;
       letter-spacing: 2px;
       color: var(--text);
-      margin-bottom: 16px;
+      margin-bottom: 24px;
       opacity: 0;
       animation: fadeUp 0.6s ease forwards 0.4s;
     }
-
     .hero-title span { color: var(--cyan); }
-
-    .hero-tagline {
-      font-family: 'Roboto Mono', monospace;
-      font-size: clamp(13px, 2vw, 16px);
+    .hero-subtitle {
+      font-size: clamp(18px, 3vw, 24px);
       color: var(--text-secondary);
-      letter-spacing: 1px;
       margin-bottom: 48px;
+      max-width: 560px;
       opacity: 0;
       animation: fadeUp 0.6s ease forwards 0.6s;
     }
-
-    .hero-description {
-      max-width: 560px;
-      font-size: 18px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 56px;
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
       opacity: 0;
       animation: fadeUp 0.6s ease forwards 0.8s;
     }
-
-    .hero-cta {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards 1s;
-    }
-
     .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       background: var(--cyan);
       color: var(--navy);
-      padding: 16px 32px;
+      padding: 18px 40px;
       border-radius: 6px;
-      font-family: 'Roboto', sans-serif;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 16px;
       text-decoration: none;
-      letter-spacing: 0.5px;
       transition: all 0.2s;
-      box-shadow: 0 0 30px rgba(0,230,180,0.3);
+      box-shadow: 0 0 40px rgba(0,230,180,0.3);
     }
-
     .btn-primary:hover {
       background: #00ffca;
-      box-shadow: 0 0 50px rgba(0,230,180,0.5);
+      box-shadow: 0 0 60px rgba(0,230,180,0.5);
       transform: translateY(-2px);
     }
-
     .btn-secondary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       background: transparent;
       color: var(--cyan);
-      padding: 16px 32px;
+      padding: 18px 40px;
       border-radius: 6px;
-      font-family: 'Roboto', sans-serif;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 16px;
       text-decoration: none;
-      letter-spacing: 0.5px;
       border: 1px solid var(--cyan);
       transition: all 0.2s;
     }
-
     .btn-secondary:hover {
       background: rgba(0,230,180,0.08);
       transform: translateY(-2px);
     }
-
-    /* ── STATS BAR ── */
-    .stats-bar {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--card-navy);
-      padding: 32px 40px;
-      display: flex;
-      justify-content: center;
-      gap: 80px;
-      flex-wrap: wrap;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 42px;
-      color: var(--cyan);
-      letter-spacing: 2px;
-      line-height: 1;
-    }
-
-    .stat-label {
+    .coming-soon-note {
+      margin-top: 16px;
       font-size: 12px;
-      letter-spacing: 2px;
       color: var(--text-muted);
-      text-transform: uppercase;
-      margin-top: 4px;
+      letter-spacing: 0.5px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 1s;
     }
 
-    /* ── SECTIONS ── */
-    section {
-      position: relative;
-      z-index: 1;
+    /* ── SECTION 2: COMPARISON ── */
+    .comparison {
+      background: var(--light-bg);
       padding: 100px 24px;
-      max-width: 1100px;
+      color: var(--light-text);
+    }
+    .comparison-inner {
+      max-width: 1000px;
       margin: 0 auto;
     }
-
-    .section-label {
+    .section-tag {
       font-family: 'Roboto Mono', monospace;
       font-size: 11px;
       letter-spacing: 3px;
-      color: var(--cyan);
+      color: var(--teal);
       text-transform: uppercase;
       margin-bottom: 16px;
+      display: block;
     }
-
-    .section-title {
+    .comparison-headline {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(36px, 5vw, 56px);
-      letter-spacing: 1px;
       line-height: 1.1;
-      margin-bottom: 20px;
+      color: var(--light-text);
+      margin-bottom: 12px;
     }
-
-    .section-subtitle {
+    .comparison-subhead {
       font-size: 17px;
-      color: var(--text-secondary);
+      color: var(--light-text-secondary);
       max-width: 560px;
       line-height: 1.7;
-      margin-bottom: 60px;
+      margin-bottom: 48px;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+    }
+    .comparison-table thead tr {
+      background: var(--navy);
+    }
+    .comparison-table thead th {
+      padding: 20px 28px;
+      text-align: left;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+    .comparison-table thead th:first-child { color: var(--text-muted); }
+    .comparison-table thead th:last-child { color: var(--cyan); }
+    .comparison-table tbody tr {
+      border-bottom: 1px solid var(--light-border);
+      background: var(--light-card);
+    }
+    .comparison-table tbody tr:last-child { border-bottom: none; }
+    .comparison-table tbody td {
+      padding: 18px 28px;
+      font-size: 15px;
+      color: var(--light-text-secondary);
+    }
+    .comparison-table tbody td:first-child {
+      color: var(--text-muted);
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+    .comparison-table tbody td:last-child {
+      color: var(--light-text);
+      font-weight: 500;
+    }
+    .check-col {
+      width: 32px;
+      text-align: center;
+    }
+    .check {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--cyan);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 20px;
+      text-align: center;
     }
 
-    /* ── FEATURES ── */
-    .features-grid {
+    /* ── SECTION 3: USE CASES ── */
+    .usecases {
+      background: var(--navy);
+      padding: 100px 24px;
+      position: relative;
+    }
+    .usecases-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .usecases-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .usecases-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5vw, 56px);
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .usecases-subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .usecases-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      gap: 24px;
     }
-
-    .feature-card {
+    .usecase-card {
       background: var(--card-navy);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
+      border-radius: 16px;
+      padding: 36px 32px;
       transition: all 0.3s;
       position: relative;
       overflow: hidden;
     }
-
-    .feature-card::before {
+    .usecase-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 2px;
+      height: 3px;
       background: linear-gradient(90deg, var(--cyan), transparent);
       opacity: 0;
       transition: opacity 0.3s;
     }
-
-    .feature-card:hover {
+    .usecase-card:hover {
       border-color: rgba(0,230,180,0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.3);
     }
-
-    .feature-card:hover::before { opacity: 1; }
-
-    .feature-icon {
-      font-size: 36px;
+    .usecase-card:hover::before { opacity: 1; }
+    .usecase-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(0,230,180,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 20px;
-      display: block;
     }
-
-    .feature-title {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--text);
+    .usecase-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--cyan);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .usecase-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--cyan);
+      text-transform: uppercase;
       margin-bottom: 10px;
     }
+    .usecase-title {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .usecase-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
 
+    /* ── SECTION 4: FEATURES ── */
+    .features {
+      background: #111B2E;
+      padding: 100px 24px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .features-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .features-top {
+      margin-bottom: 64px;
+    }
+    .features-tagline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .features-tagline span { color: var(--cyan); }
+    .features-quote {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.7;
+      padding-left: 16px;
+      border-left: 2px solid var(--cyan);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .feature-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.3s;
+    }
+    .feature-item:hover {
+      border-color: rgba(0,230,180,0.2);
+      background: rgba(0,230,180,0.03);
+    }
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(0,230,180,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .feature-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--cyan);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .feature-title {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
     .feature-desc {
       font-size: 14px;
       color: var(--text-secondary);
       line-height: 1.6;
     }
 
-    /* ── COMMANDER FOCUS ── */
-    .commander-section {
-      background: var(--card-navy);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 100px 24px;
-    }
-
-    .commander-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .commander-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 32px;
-    }
-
-    .commander-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 16px;
+    /* ── SECTION 5: CLOSING ── */
+    .closing {
       background: var(--navy);
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      font-size: 15px;
-      color: var(--text-secondary);
-    }
-
-    .commander-list li span:first-child {
-      color: var(--cyan);
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .stat-showcase {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .stat-box {
-      background: var(--navy);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 24px;
+      padding: 120px 24px;
       text-align: center;
-    }
-
-    .stat-box-value {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      color: var(--cyan);
-      letter-spacing: 2px;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .stat-box-value.amber { color: var(--amber); }
-    .stat-box-value.purple { color: var(--purple); }
-    .stat-box-value.teal { color: #00E6B4; }
-
-    .stat-box-label {
-      font-size: 11px;
-      letter-spacing: 2px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-
-    /* ── DISCORD ── */
-    .discord-section {
-      text-align: center;
-      padding: 100px 24px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .discord-card {
-      max-width: 600px;
-      margin: 0 auto;
-      background: var(--card-navy);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 56px 48px;
       position: relative;
       overflow: hidden;
     }
-
-    .discord-card::before {
-      content: '';
+    .closing-glow {
       position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center top, rgba(88,101,242,0.15), transparent 60%);
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(0,230,180,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
-
-    .discord-icon {
-      font-size: 56px;
-      margin-bottom: 24px;
-      display: block;
-    }
-
-    .discord-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 40px;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-    }
-
-    .discord-desc {
-      color: var(--text-secondary);
-      font-size: 16px;
-      line-height: 1.7;
-      margin-bottom: 36px;
-    }
-
-    .btn-discord {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #5865F2;
-      color: #fff;
-      padding: 16px 36px;
-      border-radius: 6px;
-      font-family: 'Roboto', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      transition: all 0.2s;
-      box-shadow: 0 0 30px rgba(88,101,242,0.4);
-    }
-
-    .btn-discord:hover {
-      background: #4752c4;
-      transform: translateY(-2px);
-      box-shadow: 0 0 50px rgba(88,101,242,0.6);
-    }
-
-    /* ── DOWNLOAD ── */
-    .download-section {
-      text-align: center;
-      background: linear-gradient(180deg, transparent, rgba(0,230,180,0.04), transparent);
-      padding: 100px 24px;
+    .closing-inner {
+      max-width: 700px;
+      margin: 0 auto;
       position: relative;
       z-index: 1;
-      border-top: 1px solid var(--border);
     }
-
-    .download-inner {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .download-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 48px;
-    }
-
-    .download-card {
-      background: var(--card-navy);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 40px 32px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .download-card.coming-soon {
-      opacity: 0.6;
-    }
-
-    .download-card-icon {
-      font-size: 48px;
+    .closing-eyebrow {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--cyan);
+      text-transform: uppercase;
       margin-bottom: 20px;
       display: block;
     }
-
-    .download-card-title {
+    .closing-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
+      font-size: clamp(48px, 8vw, 88px);
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 24px;
     }
-
-    .download-card-desc {
-      font-size: 14px;
+    .closing-subtitle {
+      font-size: 18px;
       color: var(--text-secondary);
-      margin-bottom: 28px;
+      margin-bottom: 48px;
+      line-height: 1.7;
     }
-
-    .coming-soon-badge {
-      display: inline-block;
-      background: rgba(255,140,0,0.15);
-      color: var(--amber);
-      border: 1px solid var(--amber);
-      border-radius: 20px;
-      padding: 8px 20px;
-      font-size: 13px;
+    .store-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card-navy);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 28px;
+      text-decoration: none;
+      transition: all 0.2s;
+      min-width: 180px;
+    }
+    .store-btn:hover {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+    }
+    .store-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--text);
+      flex-shrink: 0;
+    }
+    .store-btn-text { text-align: left; }
+    .store-btn-label {
+      display: block;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+    .store-btn-name {
+      display: block;
+      font-size: 16px;
       font-weight: 700;
+      color: var(--text);
+      font-family: 'Bebas Neue', sans-serif;
       letter-spacing: 1px;
-      text-transform: uppercase;
+    }
+    .store-coming-soon {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
     }
 
     /* ── FOOTER ── */
     footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
       background: var(--card-navy);
-      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
     }
-
     .footer-inner {
       max-width: 1100px;
       margin: 0 auto;
@@ -563,49 +568,41 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 24px;
+      gap: 20px;
     }
-
     .footer-logo {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 20px;
       letter-spacing: 2px;
       color: var(--cyan);
     }
-
     .footer-tagline {
-      font-family: 'Roboto Mono', monospace;
       font-size: 11px;
       color: var(--text-muted);
-      letter-spacing: 1px;
+      font-family: 'Roboto Mono', monospace;
       margin-top: 4px;
+      letter-spacing: 0.5px;
     }
-
     .footer-links {
       display: flex;
-      gap: 32px;
+      gap: 28px;
       list-style: none;
-      flex-wrap: wrap;
     }
-
     .footer-links a {
       color: var(--text-secondary);
       text-decoration: none;
       font-size: 14px;
       transition: color 0.2s;
     }
-
     .footer-links a:hover { color: var(--cyan); }
-
     .footer-copy {
+      max-width: 1100px;
+      margin: 24px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
       font-size: 12px;
       color: var(--text-muted);
       text-align: center;
-      margin-top: 32px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-      max-width: 1100px;
-      margin: 32px auto 0;
     }
 
     /* ── ANIMATIONS ── */
@@ -614,22 +611,17 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
       .nav-links { display: none; }
-      .stats-bar { gap: 40px; padding: 32px 20px; }
-      .commander-inner { grid-template-columns: 1fr; gap: 40px; }
-      .download-cards { grid-template-columns: 1fr; }
+      .comparison-table { font-size: 13px; }
+      .comparison-table thead th,
+      .comparison-table tbody td { padding: 14px 16px; }
+      .features-top { margin-bottom: 40px; }
+      footer { padding: 32px 20px; }
       .footer-inner { flex-direction: column; text-align: center; }
       .footer-links { justify-content: center; }
-      section { padding: 60px 20px; }
-      .discord-card { padding: 40px 24px; }
     }
   </style>
 </head>
@@ -639,181 +631,206 @@
   <nav>
     <a href="#" class="nav-logo">MTG Stat Tracker</a>
     <ul class="nav-links">
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#usecases">Use Cases</a></li>
       <li><a href="#features">Features</a></li>
-      <li><a href="#community">Community</a></li>
-      <li><a href="#download">Download</a></li>
+      <li><a href="https://discord.gg/JETFnsBQ" target="_blank" rel="noopener">Discord</a></li>
       <li><a href="privacy.html">Privacy</a></li>
-      <li><a href="mailto:hi@mtgtrackerapp.com">Contact</a></li>
     </ul>
+    <a href="#download" class="nav-cta">Get the App</a>
   </nav>
 
-  <!-- HERO -->
-  <div class="hero">
+  <!-- SECTION 1: HERO -->
+  <section class="hero">
+    <div class="hero-grid"></div>
     <div class="hero-glow"></div>
-    <p class="hero-eyebrow">Commander Stats & Match Tracking</p>
+    <p class="hero-eyebrow">Commander Stats &amp; Match Tracking</p>
     <h1 class="hero-title">MTG<br><span>Stat</span><br>Tracker</h1>
-    <p class="hero-tagline">Meticulous Data. Unrelenting Truths.</p>
-    <p class="hero-description">
-      Stop wondering who actually wins the most. MTG Stat Tracker brings real stats to your Commander table — match history, deck performance, win rates, and group leaderboards.
-    </p>
-    <div class="hero-cta">
-      <a href="#download" class="btn-primary">
-        Get the App
-      </a>
-      <a href="https://discord.gg/ZMyH6kw5NC" class="btn-secondary" target="_blank" rel="noopener">
-        Join the Community
-      </a>
+    <p class="hero-subtitle">The digital home for your Friday night crew.</p>
+    <div class="hero-actions">
+      <a href="#download" class="btn-primary">Download the Beta</a>
+      <a href="https://discord.gg/JETFnsBQ" class="btn-secondary" target="_blank" rel="noopener">Join the Community</a>
     </div>
-  </div>
+    <p class="coming-soon-note">iOS &amp; Android — Full launch coming soon</p>
+  </section>
 
-  <!-- STATS BAR -->
-  <div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Free to Play</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">iOS</div>
-      <div class="stat-label">& Android</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">∞</div>
-      <div class="stat-label">Match History</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">6</div>
-      <div class="stat-label">Player Support</div>
-    </div>
-  </div>
+  <!-- SECTION 2: COMPARISON -->
+  <section class="comparison" id="why">
+    <div class="comparison-inner">
+      <span class="section-tag">Why Us</span>
+      <h2 class="comparison-headline">Spend more time on your upkeep step than your data.</h2>
+      <p class="comparison-subhead">Most trackers feel like a second job. We built this for the IRL table — where the game comes first.</p>
 
-  <!-- FEATURES -->
-  <section id="features">
-    <p class="section-label">What's Inside</p>
-    <h2 class="section-title">Everything Your Playgroup Needs</h2>
-    <p class="section-subtitle">Built specifically for Commander. Every feature designed around how you actually play.</p>
-    <div class="features-grid">
-      <div class="feature-card">
-        <span class="feature-icon">⚔️</span>
-        <div class="feature-title">Life Counter</div>
-        <div class="feature-desc">Full-table life tracking with commander damage, poison counters, and death tracking for up to 6 players. Supports all major formats.</div>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>The Other Guys</th>
+            <th>MTG Stat Tracker</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>5 minutes to set up a lobby</td>
+            <td>Log in and play in seconds</td>
+          </tr>
+          <tr>
+            <td>Web-only or clunky interfaces</td>
+            <td>Mobile-first, friction-free design</td>
+          </tr>
+          <tr>
+            <td>Expensive subscriptions</td>
+            <td>Built for the community, not the wallet</td>
+          </tr>
+          <tr>
+            <td>High learning curve</td>
+            <td>Simple enough for kids and clubs</td>
+          </tr>
+          <tr>
+            <td>Obtrusive "math homework" feel</td>
+            <td>A companion that stays out of the way</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 3: USE CASES -->
+  <section class="usecases" id="usecases">
+    <div class="usecases-inner">
+      <div class="usecases-header">
+        <span class="section-tag" style="color: var(--cyan);">For Every Type of Table</span>
+        <h2 class="usecases-title">Built for the way you actually play.</h2>
+        <p class="usecases-subtitle">Whether you've been playing for a decade or just cracked your first pack.</p>
       </div>
-      <div class="feature-card">
-        <span class="feature-icon">📊</span>
-        <div class="feature-title">Match History</div>
-        <div class="feature-desc">Every game recorded. Search, filter, and review your entire match history with notes, duration, and final life totals.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🃏</span>
-        <div class="feature-title">Deck Stats</div>
-        <div class="feature-desc">Track win rates, average game duration, and performance by player count for every deck in your collection.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">👥</span>
-        <div class="feature-title">Saved Groups</div>
-        <div class="feature-desc">Save your regular playgroup for one-tap game setup. Group leaderboards show who's actually running the table.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🤝</span>
-        <div class="feature-title">Friends System</div>
-        <div class="feature-desc">Add friends and automatically send matches to their history. No more manual data entry for your whole playgroup.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">⚡</span>
-        <div class="feature-title">Quickstart</div>
-        <div class="feature-desc">Skip the setup and jump straight into a game. Pick format, pick player count, and start playing in seconds.</div>
+
+      <div class="usecases-grid">
+        <div class="usecase-card">
+          <div class="usecase-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <p class="usecase-label">The Friday Night Pod</p>
+          <h3 class="usecase-title">Settle the debate — with receipts.</h3>
+          <p class="usecase-desc">For the group that's been playing for a decade and finally wants to settle the "who is the threat" debate with cold, hard numbers.</p>
+        </div>
+
+        <div class="usecase-card">
+          <div class="usecase-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <p class="usecase-label">The Next Generation</p>
+          <h3 class="usecase-title">A game within the game.</h3>
+          <p class="usecase-desc">Perfect for getting the next generation obsessed. Simple icons and easy life-tracking make it approachable for players of any age.</p>
+        </div>
+
+        <div class="usecase-card">
+          <div class="usecase-icon">
+            <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <p class="usecase-label">The School Club</p>
+          <h3 class="usecase-title">Run leagues without the overhead.</h3>
+          <p class="usecase-desc">A frictionless tool for organizers to manage leagues and track progress without the complexity of spreadsheets or dedicated software.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- COMMANDER FOCUS -->
-  <div class="commander-section">
-    <div class="commander-inner">
-      <div>
-        <p class="section-label">Built for Commander</p>
-        <h2 class="section-title">The Stats Your Pod Has Been Missing</h2>
-        <ul class="commander-list">
-          <li>
-            <span>🏆</span>
-            <span>Track wins, losses, and win rate across your entire match history</span>
-          </li>
-          <li>
-            <span>⚡</span>
-            <span>Commander damage tracking per opponent with automatic death detection</span>
-          </li>
-          <li>
-            <span>🎯</span>
-            <span>See which decks perform best and which formats favor your playstyle</span>
-          </li>
-          <li>
-            <span>📈</span>
-            <span>Group leaderboards — finally settle who actually wins the most</span>
-          </li>
-          <li>
-            <span>🃏</span>
-            <span>Scryfall integration for automatic commander color identity lookup</span>
-          </li>
-        </ul>
+  <!-- SECTION 4: FEATURES -->
+  <section class="features" id="features">
+    <div class="features-inner">
+      <div class="features-top">
+        <span class="section-tag" style="color: var(--cyan);">Meticulous Data</span>
+        <h2 class="features-tagline">Unrelenting<br><span>Truths.</span></h2>
+        <p class="features-quote">We provide the receipts for every cast, every combat, and every win.</p>
       </div>
-      <div class="stat-showcase">
-        <div class="stat-box">
-          <div class="stat-box-value">73%</div>
-          <div class="stat-box-label">Win Rate</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-box-value amber">47m</div>
-          <div class="stat-box-label">Avg Duration</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-box-value purple">128</div>
-          <div class="stat-box-label">Games Played</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-box-value">12</div>
-          <div class="stat-box-label">Decks Tracked</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- DISCORD -->
-  <div class="discord-section" id="community">
-    <div class="discord-card">
-      <span class="discord-icon">💬</span>
-      <h2 class="discord-title">Join the Community</h2>
-      <p class="discord-desc">
-        Report bugs, suggest features, share your stats, and connect with other players. We're actively building MTG Stat Tracker with our community.
-      </p>
-      <a href="https://discord.gg/ZMyH6kw5NC" class="btn-discord" target="_blank" rel="noopener">
-        Join Discord
-      </a>
-    </div>
-  </div>
-
-  <!-- DOWNLOAD -->
-  <div class="download-section" id="download">
-    <div class="download-inner">
-      <p class="section-label">Get the App</p>
-      <h2 class="section-title">Available on iOS & Android</h2>
-      <p class="section-subtitle" style="margin: 0 auto 0; text-align:center;">
-        Currently in beta. Full launch coming soon on the App Store and Google Play.
-        Join our Discord to get early access.
-      </p>
-      <div class="download-cards">
-        <div class="download-card coming-soon">
-          <span class="download-card-icon">🍎</span>
-          <div class="download-card-title">iOS</div>
-          <div class="download-card-desc">App Store launch coming soon</div>
-          <span class="coming-soon-badge">Coming Soon</span>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="feature-title">Life Counter</div>
+          <div class="feature-desc">Full-table life tracking with commander damage, poison counters, and death tracking for up to 6 players across all major formats.</div>
         </div>
-        <div class="download-card coming-soon">
-          <span class="download-card-icon">🤖</span>
-          <div class="download-card-title">Android</div>
-          <div class="download-card-desc">Google Play launch coming soon</div>
-          <span class="coming-soon-badge">Coming Soon</span>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="feature-title">Match History</div>
+          <div class="feature-desc">Every game recorded. Search, filter, and review your complete match history with notes, duration, and final life totals.</div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="feature-title">Deck Stats</div>
+          <div class="feature-desc">Track win rates, average game duration, and performance by player count for every deck in your collection.</div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="feature-title">Saved Groups &amp; Leaderboards</div>
+          <div class="feature-desc">Save your regular playgroup for one-tap setup. Group leaderboards show who is actually running the table.</div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          </div>
+          <div class="feature-title">Friends System</div>
+          <div class="feature-desc">Add friends and automatically send matches to their history. No more manual data entry for the whole playgroup.</div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="feature-title">Quickstart</div>
+          <div class="feature-desc">Skip setup entirely. Pick format, pick seats, and start playing in seconds — no account required for opponents.</div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- SECTION 5: CLOSING / DOWNLOAD -->
+  <section class="closing" id="download">
+    <div class="closing-glow"></div>
+    <div class="closing-inner">
+      <span class="closing-eyebrow">Get the App</span>
+      <h2 class="closing-title">Bring the truth to your table.</h2>
+      <p class="closing-subtitle">Currently in beta. Join our Discord for early access while we finalize our App Store and Google Play listings.</p>
+
+      <div class="store-buttons">
+        <a href="https://discord.gg/JETFnsBQ" class="store-btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" style="fill:none; stroke:var(--text); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <div class="store-btn-text">
+            <span class="store-btn-label">Join us on</span>
+            <span class="store-btn-name">Discord</span>
+          </div>
+        </a>
+
+        <a href="#" class="store-btn" style="opacity: 0.5; cursor: default;">
+          <svg viewBox="0 0 24 24" style="fill:var(--text);"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div class="store-btn-text">
+            <span class="store-btn-label">Download on the</span>
+            <span class="store-btn-name">App Store</span>
+          </div>
+        </a>
+
+        <a href="#" class="store-btn" style="opacity: 0.5; cursor: default;">
+          <svg viewBox="0 0 24 24" style="fill:var(--text);"><path d="M3.18 23.76c.3.17.64.22.99.14l12.82-7.41-2.82-2.82-11 10.09zM.44 1.05C.17 1.37 0 1.83 0 2.42v19.16c0 .59.17 1.05.44 1.37l.07.07 10.73-10.73v-.25L.51.98l-.07.07zM20.8 10.09l-2.7-1.56-3.14 3.14 3.14 3.14 2.72-1.57c.78-.45.78-1.16-.02-1.61v.46zM4.17.18l12.82 7.41-2.82 2.82L3.18.32A1.13 1.13 0 0 1 4.17.18z"/></svg>
+          <div class="store-btn-text">
+            <span class="store-btn-label">Get it on</span>
+            <span class="store-btn-name">Google Play</span>
+          </div>
+        </a>
+      </div>
+      <p class="store-coming-soon">App Store and Google Play listings coming soon. Join Discord for beta access.</p>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>
@@ -823,14 +840,15 @@
         <div class="footer-tagline">Meticulous Data. Unrelenting Truths.</div>
       </div>
       <ul class="footer-links">
+        <li><a href="#why">Why Us</a></li>
         <li><a href="#features">Features</a></li>
-        <li><a href="https://discord.gg/ZMyH6kw5NC" target="_blank" rel="noopener">Discord</a></li>
+        <li><a href="https://discord.gg/JETFnsBQ" target="_blank" rel="noopener">Discord</a></li>
         <li><a href="privacy.html">Privacy Policy</a></li>
         <li><a href="mailto:hi@mtgtrackerapp.com">Contact</a></li>
       </ul>
     </div>
     <p class="footer-copy">
-      © 2026 Sans Legume LLC. MTG Stat Tracker is not affiliated with, endorsed by, or sponsored by Wizards of the Coast.
+      &copy; 2026 Sans Legume LLC. MTG Stat Tracker is not affiliated with, endorsed by, or sponsored by Wizards of the Coast.
       Magic: The Gathering is property of Wizards of the Coast LLC.
     </p>
   </footer>
